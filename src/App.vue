@@ -43,7 +43,7 @@ onMounted(async () => {
     <header class="header">
       <h1>Il nostro mondo 🌍💖</h1>
       <nav>
-        <router-link to="/viaggi">Mappa</router-link>
+        <router-link to="/">Mappa</router-link>
       </nav>
     </header>
 

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MappaPage from '../pages/mappa.vue'
+import MappaPage from '../pages/MappaPage.vue'
 
 const router = createRouter({
   history: createWebHistory(),
