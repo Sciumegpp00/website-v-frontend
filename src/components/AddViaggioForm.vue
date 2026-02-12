@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getViaggi } from '../api/viaggi'
 
 const title = ref('')
 const lat = ref(0)
