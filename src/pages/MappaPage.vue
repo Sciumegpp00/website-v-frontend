@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ViaggiMap from '../components/ViaggiMap.vue'
+import AddViaggioForm from '../components/AddViaggioForm.vue'
 </script>
 
 <template>

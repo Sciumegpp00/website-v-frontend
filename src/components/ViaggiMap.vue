@@ -19,15 +19,17 @@ onMounted(async () => {
 
   // 3️⃣ Recuperiamo i viaggi dal backend
   const viaggi = await getViaggi()
+  console.log('VIAGGI:', viaggi)
 
   // 4️⃣ Aggiungiamo marker
-  viaggi.forEach((v: any) => {
-    const marker = L.marker([v.lat, v.lng])
-      .addTo(map)
-      .bindPopup(`
-        <strong>${v.title}</strong><br/>
-        ${v.status === 'visited' ? 'Già visitato 💖' : 'Prossima meta ✈️'}
-      `)
+  const iconVisited = L.icon({ iconUrl: '/icons/heart.png', iconSize: [25, 41] })
+  const iconPlanned = L.icon({ iconUrl: '/icons/plane.png', iconSize: [25, 41] })
+  viaggi.forEach((v: any)=> {
+    L.marker([Number(v.lat), Number(v.lng)], {
+      icon: v.status === 'visited' ? iconVisited : iconPlanned
+    })
+    .addTo(map)
+    .bindPopup(`<strong>${v.title}</strong>`)
   })
 })
 </script>
