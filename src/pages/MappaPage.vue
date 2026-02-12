@@ -5,6 +5,7 @@ import ViaggiMap from '../components/ViaggiMap.vue'
 <template>
   <div>
     <h2>Le nostre avventure ✈️</h2>
+    <AddViaggioForm />
     <ViaggiMap />
   </div>
 </template>
