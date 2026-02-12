@@ -3,8 +3,8 @@ import { onMounted, ref } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { getViaggi } from '../api/viaggi'
-import heartIcon from '@/assets/icons/heart.png'
-import planeIcon from '@/assets/icons/plane.png'
+import heartIcon from '../assets/icons/heart.png'
+import planeIcon from '../assets/icons/plane.png'
 
 const mapElement = ref<HTMLDivElement | null>(null)
 
