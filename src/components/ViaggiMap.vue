@@ -22,8 +22,8 @@ onMounted(async () => {
   console.log('VIAGGI:', viaggi)
 
   // 4️⃣ Aggiungiamo marker
-  const iconVisited = L.icon({ iconUrl: './assets/heart.svg', iconSize: [25, 41] })
-  const iconPlanned = L.icon({ iconUrl: '../assets/plane.svg', iconSize: [25, 41] })
+  const iconVisited = L.icon({ iconUrl: './assets/heart.jpg', iconSize: [25, 41] })
+  const iconPlanned = L.icon({ iconUrl: '../assets/plane.jpg', iconSize: [25, 41] })
   viaggi.forEach((v: any)=> {
     L.marker([Number(v.lat), Number(v.lng)], {
       icon: v.status === 'visited' ? iconVisited : iconPlanned
