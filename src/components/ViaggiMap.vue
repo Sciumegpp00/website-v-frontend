@@ -71,6 +71,9 @@
     import 'leaflet/dist/leaflet.css'
     import { getViaggi } from '../api/viaggi'
     import { watch } from 'vue'
+    import heartIcon from '../assets/icons/heart.png'
+    import planeIcon from '../assets/icons/plane.png'
+    import tmpIcon from '../assets/icons/tmp.png'
 
     const mapElement = ref<HTMLDivElement | null>(null)
 
@@ -91,6 +94,11 @@
 
     const iconPlanned = L.icon({
     iconUrl: '/icons/plane.png',
+    iconSize: [32, 32]
+    })
+
+    const iconTmp = L.icon({
+    iconUrl: '/icons/tmp.png',
     iconSize: [32, 32]
     })
 
@@ -162,6 +170,28 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map)
+
+        const iconVisited = L.icon({
+            iconUrl: heartIcon,
+            iconSize: [40, 40],       // dimensione dell’icona in px
+            iconAnchor: [20, 40],     // punto della base dell’icona che corrisponde al marker
+            popupAnchor: [0, -40]     // posizione del popup rispetto al marker
+        })
+
+        const iconPlanned = L.icon({
+            iconUrl: planeIcon,
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        })
+
+        const iconTmp = L.icon({
+            iconUrl: planeIcon,
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        })
+
         viaggi.forEach((v: any)=> {
         L.marker([Number(v.lat), Number(v.lng)], {
         icon: v.status === 'visited' ? iconVisited : iconPlanned
@@ -184,7 +214,7 @@
 
             if (tempMarker) map.removeLayer(tempMarker)
 
-            tempMarker = L.marker([lat.value, lng.value]).addTo(map)
+            tempMarker = L.marker([lat.value, lng.value], { icon: iconTmp }).addTo(map)
 
             title.value = await getLocationName(lat.value, lng.value)
         })
