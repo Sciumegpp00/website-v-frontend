@@ -97,11 +97,6 @@
     iconSize: [32, 32]
     })
 
-    const iconTmp = L.icon({
-    iconUrl: '/icons/tmp.png',
-    iconSize: [32, 32]
-    })
-
     async function getLocationName(lat: number, lng: number) {
     const res = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
@@ -186,7 +181,7 @@
         })
 
         const iconTmp = L.icon({
-            iconUrl: planeIcon,
+            iconUrl: tmpIcon,
             iconSize: [40, 40],
             iconAnchor: [20, 40],
             popupAnchor: [0, -40]
