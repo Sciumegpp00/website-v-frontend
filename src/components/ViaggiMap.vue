@@ -69,6 +69,8 @@
     import { ref, onMounted } from 'vue'
     import L from 'leaflet'
     import 'leaflet/dist/leaflet.css'
+    import { getViaggi } from '../api/viaggi'
+    import { watch } from 'vue'
 
     const mapElement = ref<HTMLDivElement | null>(null)
 
@@ -106,25 +108,88 @@
     )
     }
 
-    onMounted(() => {
-    if (!mapElement.value) return
+    function clearSelection() {
+        lat.value = null
+        lng.value = null
+        title.value = ''
+        description.value = ''
+        date.value = ''
+        status.value = 'visited'
 
-    map = L.map(mapElement.value).setView([45, 10], 4)
+        if (tempMarker) {
+            map.removeLayer(tempMarker)
+            tempMarker = null
+        }
+    }
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map)
 
-    map.on('click', async (e) => {
-        lat.value = Number(e.latlng.lat.toFixed(6))
-        lng.value = Number(e.latlng.lng.toFixed(6))
+    function handleEscape(e: KeyboardEvent) {
+        if (e.key === 'Escape') {
+            clearSelection()
+        }
+    }
 
-        if (tempMarker) map.removeLayer(tempMarker)
+    function updateTempMarker() {
+        if (!lat.value || !lng.value) return
 
-        tempMarker = L.marker([lat.value, lng.value]).addTo(map)
+        const icon = status.value === 'visited'
+            ? iconVisited
+            : iconPlanned
 
-        title.value = await getLocationName(lat.value, lng.value)
+        if (tempMarker) {
+            tempMarker.setLatLng([lat.value, lng.value])
+            tempMarker.setIcon(icon)
+        } else {
+            tempMarker = L.marker([lat.value, lng.value], { icon }).addTo(map)
+        }
+    }
+    
+    watch(status, () => {
+        if (tempMarker) {
+            updateTempMarker()
+        }
     })
+    
+    onMounted(async () => {
+        window.removeEventListener('keydown', handleEscape)
+
+        if (!mapElement.value) return
+
+        map = L.map(mapElement.value).setView([45, 10], 4)
+
+        const viaggi = await getViaggi()
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map)
+        viaggi.forEach((v: any)=> {
+        L.marker([Number(v.lat), Number(v.lng)], {
+        icon: v.status === 'visited' ? iconVisited : iconPlanned
+        })
+        .addTo(map)
+        .bindPopup(`<div style="min-width: 200px;">
+            <h3 style="margin: 0 0 5px 0;">${v.title}</h3>
+            <p style="margin: 0 0 5px 0;">
+            ${v.description ?? 'Nessuna descrizione'}
+            </p>
+            <small>
+            📅 ${v.date ?? 'Data non specificata'}
+            </small>
+        </div>`)
+    })
+
+        map.on('click', async (e) => {
+            lat.value = Number(e.latlng.lat.toFixed(6))
+            lng.value = Number(e.latlng.lng.toFixed(6))
+
+            if (tempMarker) map.removeLayer(tempMarker)
+
+            tempMarker = L.marker([lat.value, lng.value]).addTo(map)
+
+            title.value = await getLocationName(lat.value, lng.value)
+        })
+        // 👇 ESC listener
+        window.addEventListener('keydown', handleEscape)
     })
 
     async function saveViaggio() {
