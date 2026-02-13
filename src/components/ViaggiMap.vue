@@ -274,7 +274,8 @@
       <div ref="mapElement" class="map"></div>
 
       <div class="form-card">
-        <h2>Aggiungi una nuova tappa (clicca sulla mappa il luogo e inserisci qui i dati)</h2>
+        <h2>Aggiungi una nuova tappa</h2>
+        <h4>(clicca sulla mappa il luogo e inserisci qui i dati)</h4>
 
         <form @submit.prevent="saveViaggio">
           <input v-model="title" placeholder="Nome della località" required />
