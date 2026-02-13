@@ -126,13 +126,24 @@
     let tempMarker: L.Marker | null = null
 
     const iconVisited = L.icon({
-    iconUrl: '/icons/heart.png',
-    iconSize: [32, 32]
+        iconUrl: heartIcon,
+        iconSize: [40, 40],       // dimensione dell’icona in px
+        iconAnchor: [20, 40],     // punto della base dell’icona che corrisponde al marker
+        popupAnchor: [0, -40]     // posizione del popup rispetto al marker
     })
 
     const iconPlanned = L.icon({
-    iconUrl: '/icons/plane.png',
-    iconSize: [32, 32]
+        iconUrl: planeIcon,
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40]
+    })
+
+    const iconTmp = L.icon({
+        iconUrl: tmpIcon,
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40]
     })
 
     async function getLocationName(lat: number, lng: number) {
@@ -206,27 +217,6 @@
             keepBuffer: 2,
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map)
-
-        const iconVisited = L.icon({
-            iconUrl: heartIcon,
-            iconSize: [40, 40],       // dimensione dell’icona in px
-            iconAnchor: [20, 40],     // punto della base dell’icona che corrisponde al marker
-            popupAnchor: [0, -40]     // posizione del popup rispetto al marker
-        })
-
-        const iconPlanned = L.icon({
-            iconUrl: planeIcon,
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -40]
-        })
-
-        const iconTmp = L.icon({
-            iconUrl: tmpIcon,
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -40]
-        })
         
         const markersLayer = L.layerGroup().addTo(map)
 
