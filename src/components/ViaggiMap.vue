@@ -163,6 +163,9 @@
         const viaggi = await getViaggi()
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            updateWhenIdle: true,
+            keepBuffer: 2,
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map)
 
@@ -186,12 +189,13 @@
             iconAnchor: [20, 40],
             popupAnchor: [0, -40]
         })
+        
+        const markersLayer = L.layerGroup().addTo(map)
 
         viaggi.forEach((v: any)=> {
         L.marker([Number(v.lat), Number(v.lng)], {
         icon: v.status === 'visited' ? iconVisited : iconPlanned
         })
-        .addTo(map)
         .bindPopup(`<div style="min-width: 200px;">
             <h3 style="margin: 0 0 5px 0;">${v.title}</h3>
             <p style="margin: 0 0 5px 0;">
@@ -201,6 +205,7 @@
             📅 ${v.date ?? 'Data non specificata'}
             </small>
         </div>`)
+        .addTo(markersLayer)
     })
 
         map.on('click', async (e) => {
