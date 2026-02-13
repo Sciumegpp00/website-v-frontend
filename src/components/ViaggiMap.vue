@@ -24,8 +24,21 @@ onMounted(async () => {
   console.log('VIAGGI:', viaggi)
 
   // 4️⃣ Aggiungiamo marker
-  const iconVisited = L.icon({ iconUrl: heartIcon, iconSize: [25, 41] })
-const iconPlanned = L.icon({ iconUrl: planeIcon, iconSize: [25, 41] })
+  
+  const iconVisited = L.icon({
+    iconUrl: heartIcon,
+    iconSize: [40, 40],       // dimensione dell’icona in px
+    iconAnchor: [20, 40],     // punto della base dell’icona che corrisponde al marker
+    popupAnchor: [0, -40]     // posizione del popup rispetto al marker
+  })
+
+  const iconPlanned = L.icon({
+    iconUrl: planeIcon,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+  })
+  
   viaggi.forEach((v: any)=> {
     L.marker([Number(v.lat), Number(v.lng)], {
       icon: v.status === 'visited' ? iconVisited : iconPlanned
