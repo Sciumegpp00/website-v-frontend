@@ -44,7 +44,15 @@ onMounted(async () => {
       icon: v.status === 'visited' ? iconVisited : iconPlanned
     })
     .addTo(map)
-    .bindPopup(`<strong>${v.title}</strong>`)
+    .bindPopup(`<div style="min-width: 200px;">
+        <h3 style="margin: 0 0 5px 0;">${v.title}</h3>
+        <p style="margin: 0 0 5px 0;">
+          ${v.description ?? 'Nessuna descrizione'}
+        </p>
+        <small>
+          📅 ${v.date ?? 'Data non specificata'}
+        </small>
+      </div>`)
   })
 })
 </script>
