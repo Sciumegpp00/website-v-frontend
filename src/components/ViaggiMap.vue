@@ -33,12 +33,50 @@
     padding: 25px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 420px;
+    margin: auto;
     }
 
     .form-card h2 {
     margin-bottom: 20px;
     color: #be123c;
     }
+    
+    .form-card input,
+    .form-card textarea,
+    .form-card select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #fbcfe8;
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box; /* fondamentale */
+    }
+
+    .form-card textarea {
+    min-height: 100px;
+    resize: vertical;
+    }
+    .form-card button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    background: #be123c;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    }
+
+    .form-card button:hover {
+    background: #9f1239;
+    }
+
 
     input, textarea, select {
     width: 100%;
@@ -268,7 +306,7 @@
 </script>
 <template>
   <div class="page">
-    <h1 class="title">I Nostri Viaggi 💖</h1>
+    <h1 class="title">Le nostre avventure ​ ✈️💘</h1>
 
     <div class="content">
       <div ref="mapElement" class="map"></div>
@@ -279,7 +317,7 @@
 
         <form @submit.prevent="saveViaggio">
           <input v-model="title" placeholder="Nome della località" required />
-          <textarea v-model="description" placeholder="Un ricordo speciale..."></textarea>
+          <textarea  v-model="description" placeholder="Un ricordo speciale..."></textarea>
           <input v-model="date" type="date" />
 
           <select v-model="status">
