@@ -273,7 +273,7 @@
     <div class="content">
       <div ref="mapElement" class="map"></div>
 
-      <div class="form-card">
+      <!-- <div class="form-card">
         <h2>Aggiungi una nuova tappa ✨</h2>
 
         <form @submit.prevent="saveViaggio">
@@ -288,7 +288,7 @@
 
           <button type="submit">Salva il ricordo</button>
         </form>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
