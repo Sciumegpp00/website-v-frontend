@@ -34,9 +34,8 @@ const handleSubmit = async () => {
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <input v-model="title" placeholder="Nome luogo" required />
-    <input v-model.number="lat" type="number" placeholder="Latitudine" required />
-    <input v-model.number="lng" type="number" placeholder="Longitudine" required />
+    <input v-model.number="lat" type="number" step="any" />
+    <input v-model.number="lng" type="number" step="any" />
     <select v-model="status">
       <option value="visited">Visitato</option>
       <option value="planned">Pianificato</option>
