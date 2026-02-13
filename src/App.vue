@@ -40,11 +40,8 @@ onMounted(async () => {
 
 <template>
   <div class="layout">
-    <header class="header">
-      <h1>Il nostro mondo 🌍💖</h1>
-      <nav>
-        <router-link to="/">Mappa</router-link>
-      </nav>
+    <header class="header" text-align: center>
+      <h1>Diario Viaggi VZ+GAS🌍🐧​💘​</h1>
     </header>
 
     <main class="content">
@@ -52,7 +49,7 @@ onMounted(async () => {
     </main>
 
     <footer class="footer">
-      <small>Creato con amore ✨</small>
+      <small>Creato con taaaanto amore ✨</small>
     </footer>
   </div>
 </template>
